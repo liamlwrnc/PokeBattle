@@ -13,7 +13,7 @@
     // im now creating lists of both my rivals and my own pokemon so I can select from them to decide who is battling who
     class Program
     {
-        static List<Pokemon> garyPokemon = new List<Pokemon>() {
+        static List<Pokemon> garyPokemon = new List<Pokemon>() { // lists over arrays in c#
             new Pokemon {
                 Id = 1,
                 Name = "Mr.Mime",
@@ -58,7 +58,7 @@
             }
         };
 
-        static List<Pokemon> myPokemon = new List<Pokemon>() {
+        static List<Pokemon> myPokemon = new List<Pokemon>() { 
             new Pokemon {
                 Id = 1,
                 Name = "Blastoise",
@@ -103,6 +103,14 @@
             }
         };
 
+       /* semi pseudo-coding the addition of a move list rather than singular moves for each pokemon
+        assigning each move with a damage int will allow me to deduct from overall Health value for longer battles in future
+
+        var movesList = new List<KeyValuePair<string, int>>();
+
+        movesList.Add(new KeyValuePair<string, int>("Slam", 20));
+        movesList.Add(new KeyValuePair<string, int>("Quick Attack", 40));
+        movesList.Add(new KeyValuePair<string, int>("Peck", 60)); */
         static void Main(string[] args)
         {
             Console.WriteLine("Your rival Gary wants to battle!");
@@ -129,7 +137,7 @@
 
             foreach (var pokemon in myPokemon)
             {
-                Console.WriteLine($"{pokemon.Id} {pokemon.Name}");
+                Console.WriteLine($"{pokemon.Id} {pokemon.Name}"); // $ for interpolation rather than using + as usual concatenation operator
             }
 
             if (int.TryParse(Console.ReadLine(), out int choice)) // this converts my string to an int which enables me to use a simple comparison operator later on
@@ -154,8 +162,8 @@
                 var myChoice = myPokemon[choice - 1]; // index starts at 0 but 1+ looks better
 
                 Console.WriteLine("");
-                Console.WriteLine("Gary: Hehe this is gonna be too easy! I choose you, " + randomChoice.Name + "!\n");
-                Console.WriteLine("Thats what you think! Lets go, " + myChoice.Name + "!\n");
+                Console.WriteLine($"Gary: Hehe this is gonna be too easy! I choose you,{ randomChoice.Name}!\n");
+                Console.WriteLine($"Thats what you think! Lets go, {myChoice.Name}!\n");
 
                 // the above code was initially commented out as I realised I wouldnt be able to use a comparison operator to determine a winner when 
                 // randomChoice was an int and myChoice would be a string. Upon discovering the TryParse function however, I was able to make it work
@@ -164,8 +172,8 @@
                 input = Console.ReadLine();
                 Console.WriteLine();
 
-                Console.WriteLine(randomChoice.Name + " used " + randomChoice.Move + "!\n");
-                Console.WriteLine(myChoice.Name + " used " + myChoice.Move + "!\n");
+                Console.WriteLine($"{randomChoice.Name} used {randomChoice.Move}!\n");
+                Console.WriteLine($"{myChoice.Name} used {myChoice.Move}!\n");
                 Console.WriteLine("The ground trembles as these two titans engage in a fierce battle. However, there can be only one winner!\n");
 
                 if (randomChoice.Attack > myChoice.Health)
@@ -185,3 +193,5 @@
         }
     }
 }
+
+// look at utilising a while loop to enable user to continue battling, prompt eg 'would you like to battle again?'
